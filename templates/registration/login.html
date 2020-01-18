@@ -1,17 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="container pt-5 pb-5">
+        <div class="row">
+            <div class="col-sm-20 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin d-inline-block bg-dark text-lg-center">
+                    <div class="card-header bg-transparent text-white-50">
+                        <h1><b>Login to BEGIN!</b></h1>
+                    </div>
+                    <div class="card-body bg-dark pt-4 pb-5 ">
+                        <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
 
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    Username:
-    <br>
-    <input type="text" name="username"/>
-    <br>
-    Password:
-    <br>
-    <input type="password" name="password"/>
-    <br> <br>
-    <input class="btn btn-primary" type="submit" value="Login">
-</form>
+                            <div class="form-label-group col-sm-20 pb-2">
+                                <input type="text" name="username" class="form-control" placeholder="Username" required
+                                       autofocus>
+                            </div>
+
+                            <div class="form-label-group col-sm-20 pb-4">
+                                <input name="password" type="password" class="form-control" placeholder="Password"
+                                       required
+                                       autofocus>
+                            </div>
+
+                            <div class="form-control-file">
+                                <button type="submit" class="btn btn-success btn-lg col-md-5">
+                                    Login
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

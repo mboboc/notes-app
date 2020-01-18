@@ -8,6 +8,7 @@ from django.views.generic import CreateView
 from notes.forms import UserNotesForm
 from notes.models import Note
 
+
 def login(request):
     if request.method == 'POST':
         user = auth.authenticate(username=request.POST['username'], password=request.POST['password'])
@@ -23,9 +24,15 @@ def login(request):
 def index(request):
     return render(request, 'index.html')
 
+
 @login_required
 def home(request):
     return render(request, 'home.html')
+
+
+@login_required
+def display_notes(request):
+    return request, 'display_notes.html'
 
 
 # def signup(request):
@@ -59,12 +66,13 @@ class SignupView(CreateView):
 class CreateNoteView(CreateView):
     model = Note
     form_class = UserNotesForm
-    template_name = 'index.html'
+    template_name = 'create_note.html'
 
     def form_valid(self, form):
         if form.is_valid():
             form.save()
             return redirect('notes:home')
+
 # render = preia HTML
 # redirect = te duce la pagina
 # reverse

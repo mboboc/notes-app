@@ -1,0 +1,25 @@
+<!-- templates/home.html-->
+
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="container pt-5 pb-5">
+        <div class="row">
+            <div class="col-sm-20 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin d-inline-block bg-dark text-lg-center">
+                    <div>
+                        <form method="post" action="{% url 'notes:create_note' %}">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <input class="btn btn-primary" type="submit" value="POST IT">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
