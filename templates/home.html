@@ -1,0 +1,38 @@
+<!-- templates/home.html-->
+
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div>
+        {% if user.is_authenticated %}
+            Hi {{ user.username }}!
+            {% csrf_token %}
+            {% for field in form %}
+                {% if field.label == 'note' %}
+                    <div class="note">
+                        <div class="danger">
+                            {{ field.title }}
+                        </div>
+                    </div>
+                {% endif %}
+                {{ field.label }}
+                {{ field }}
+                {{ form.errors }}
+            {% endfor %}
+            <button class="btn btn-primary" type="submit" value=""> Create note</button>
+            <div class="note">
+                <div class="note-title">
+                    My first note!
+                </div>
+                <div class="note-content">
+                    It works!?
+                </div>
+            </div>
+        {% else %}
+            <p>You are not logged in</p>
+            <a href="{% url 'login' %}">login</a>
+        {% endif %}
+    </div>
+{% endblock %}
