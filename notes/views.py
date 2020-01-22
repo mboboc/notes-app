@@ -27,12 +27,14 @@ def index(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    current_user = request.user
+    context = {'current_user':current_user}
+    return render(request, 'home.html', context)
 
 
 @login_required
 def display_notes(request):
-    return request, 'display_notes.html'
+    return render(request, 'display_notes.html')
 
 
 # def signup(request):

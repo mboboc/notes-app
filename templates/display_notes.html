@@ -6,7 +6,7 @@
     {% if user.is_authenticated %}
         {% csrf_token %}
         {% for field in form %}
-            {% if field.label == 'note' %}
+            {% if field.label == {{ curre }} %}
                 <div class="note">
                     <div class="note-title">
                         {{ field.title }}
@@ -23,7 +23,3 @@
         <a href="{% url 'login' %}">login</a>
     {% endif %}
 {% endblock %}
-
-{#            {{ field.label }}#}
-{#            {{ field }}#}
-{#            {{ form.errors }}#}
