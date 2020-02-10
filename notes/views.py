@@ -25,34 +25,30 @@ def index(request):
     return render(request, 'index.html')
 
 
+def edit_note(request):
+    context={
+
+    }
+    return render(request, 'display_notes.html', context)
+
 @login_required
 def home(request):
     current_user = request.user
-    context = {'current_user':current_user}
+    context = {'current_user': current_user}
     return render(request, 'home.html', context)
 
 
 @login_required
 def display_notes(request):
-    return render(request, 'display_notes.html')
+    current_user = request.user.username
+    current_user_id = User.objects.get(username=current_user)
+    user_notes = Note.objects.filter(user_id=current_user_id)
+    context = {
+        'user_notes': user_notes,
+        'current_user': current_user,
+    }
+    return render(request, 'display_notes.html', context)
 
-
-# def signup(request):
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password1']
-#             user = authenticate(username=username, password=password)
-#             auth_login(request, user)
-#             return redirect('index.html')
-#     else:
-#         form = UserCreationForm()
-#
-#     context = {'form': form}
-#     return render(request, 'signup.html', context)
 
 class SignupView(CreateView):
     model = User
@@ -74,7 +70,3 @@ class CreateNoteView(CreateView):
         if form.is_valid():
             form.save()
             return redirect('notes:home')
-
-# render = preia HTML
-# redirect = te duce la pagina
-# reverse
